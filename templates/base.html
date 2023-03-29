@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarala&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <header>
+        <div id="header">
+            <div style="display: table-cell; vertical-align: middle;">
+                <br>
+                <p style="color: white; font-size: 40px;  text-align: center; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"><b>SISTEMA DE GERAÇÃO DE DAES</b>
+                </p>
+            </div>
+        </div>
+    </header>
+</head>
+<body>
+    {% block content %}
+    <span>TESTE</span>
+    {% endblock %}
+    <!-- <footer>
+        <div id="footer">
+            <div style="display: table-cell; vertical-align: middle;">
+            </div>
+        </div>
+    </footer> -->
+</body>
+</html>
+
+<style>
+   #header {
+    background-image: url("{% static 'images/header-daes.png' %}");
+    background-size: 100%;
+    width: 100%;
+    height: 10vh; 
+    display: table;
+   }
+   #footer {
+    background-image: url("{% static 'images/foot2.jpg' %}");
+    background-size: 25%;
+    width: 100%;
+    height: 500px; 
+    display: table;
+   }
+</style>
+<style>body{background-color: #EDEDE9;}</style>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

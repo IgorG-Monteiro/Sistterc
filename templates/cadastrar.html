@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="header">
+        <a class="logo">Acesso por {{ user }}</a>
+        <div class="header-right">
+        <a name='link_sair' href = "{% url 'iniciar' %}">Voltar <img src="{% static 'images/voltar.png' %}" width="30px" height="auto"></a>
+        </div>
+    </div>
+
+    
+        <section>
+        
+            <div class="container">
+            <h1 class="title">Cadastro de Colaborador</h1>
+            {% if erro %}
+                <center style="color: red;">{{erro}}</center>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                
+                {{ form|crispy }}
+                
+                <button class="btn btn-info" type="submit">Cadastrar Colaborador</button>
+            </form>
+            
+        </section>
+    </div>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>body{background-color: rgb(224, 236, 247);}</style>
+</body>
+</html>
+
+{% endblock %}

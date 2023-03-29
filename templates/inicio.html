@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <a class="logo">Acesso por {{ user }}</a>
+        <div class="header-right">
+          <a name='link_sair' href = "{% url 'sair' %}">Sair <img src="{% static 'images/sair.png' %}" width="30px" height="auto"></a>
+        </div>
+    </div>
+    <section>
+    <div>
+        <IMG width="110px" height="auto" style="margin: 20px 20px 20px 20px;" align=left SRC="{% static 'images/Lab_inov.png' %}" alt="imagem"><IMG width="180px" height="auto" style="margin: 35px 25px 25px 25px;" align=right SRC="{% static 'images/ASPLAN-DG.png' %}" alt="imagem">
+    </div>
+    <div class="table__center">
+        <h2 class="title__colab">COLABORADORES</h2>
+        <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+                    <tr>
+                    {% if  user.is_superuser  %}
+                        <th>Criador</th>
+                    {% endif  %}
+                        <th>Nome Completo</th>
+                        <th>Unidade</th>
+                        <th>Contrato</th>
+                        <th>Vigência</th>
+                        <th>Contratada</th>
+                        <th>CNPJ</th>
+                        <th>Editar Info</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for r in terc %}
+                    <tr>
+                    {% if  user.is_superuser  %}
+                        <td>{{ r.usuario_cadastro }}</td>
+                    {% endif  %}
+                        <td>{{ r.nome_completo }}</td>
+                        <td>{{ r.unidade }}</td>
+                        <td>{{ r.contrato }}</td>
+                        <td>{{ r.vigencia }}</td>
+                        <td>{{ r.contratada }}</td>
+                        <td>{{ r.cnpj_contratada }}</td>
+                        <td><a class="btn btn-warning btn-sm" name='link_edit' id="{{ r.id }}"  href = "{% url 'editar' id=r.id %}">Editar</a></td>
+                        <td><a class="btn btn-danger btn-sm" onclick="alerta()" name='link_del' id="{{ r.id }}"  href = "{% url 'deletar' id=r.id %}">Excluir</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a name="link_cad" href = "{% url 'cadastrar' %}" style="text-decoration:none"><button style="margin-right: 70px;" class="button-17 float-right" role="button"><span class="text">Cadastrar Novo Colaborador</span></button></a>
+    </div>
+    <div class="buttons__gerar">
+        <a name='link_ger' href = "{% url 'gerador' %}" style="text-decoration:none"><button class="button-17 gera__button" role="button"><span class="text">Gerar DAES</span></button></a>
+        {% if request.user.is_superuser %}
+            <a name='link_gera_tra' href = "{% url 'gerador_transparencia' %}" style="text-decoration:none"><button id="btn_trans" class="button-17 gera__button" role="button"><span class="text">Gerar Transparência</span></button></a>
+        {% endif %}
+    </div>
+
+    
+
+</body>
+<style>body{background-color: rgb(224, 236, 247);}</style>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script>function alerta(){
+    var realmente = confirm("Deseja?");
+    if (!realmente) {
+        return
+    }
+}</script>
+</section>
+</html>

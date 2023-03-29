@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="header">
+    <span style="font-family: 'Sarala', sans-serif;">Bem vindo, {{ user }}</span>
+    <div class="header-right">
+        <a name='link_sair' href = "{% url 'sair' %}">Sair <img src="{% static 'images/sair.png' %}" width="30px" height="auto"></a>
+    </div>
+</div>
+
+<div class="table__center">
+    <h2 class="title__colab">COLABORADORES</h2>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+                <tr>
+                {% if  user.is_superuser  %}
+                    <th>Criador</th>
+                {% endif  %}
+                    <th>Nome Completo</th>
+                    <th>Cargo</th>
+                    <th>Unidade</th>
+                    <th>Contrato</th>
+                    <th>Vigência</th>
+                    <th>Contratada</th>
+                    <th>CNPJ</th>
+                    <th>Editar Info</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for r in terc %}
+                <tr>
+                {% if  user.is_superuser  %}
+                    <td>{{ r.usuario_cadastro }}</td>
+                {% endif  %}
+                    <td>{{ r.nome_completo }}</td>
+                    <td>{{ r.cargo }}</td>
+                    <td>{{ r.unidade }}</td>
+                    <td>{{ r.contrato }}</td>
+                    <td>{{ r.vigencia }}</td>
+                    <td>{{ r.contratada }}</td>
+                    <td>{{ r.cnpj_contratada }}</td>
+                    <td><a class="btn btn-warning btn-sm" name='link_edit' id="{{ r.id }}"  href = "{% url 'editar' id=r.id %}">Editar</a></td>
+                    <td><a class="btn btn-danger btn-sm" onclick="alerta()" name='link_del' id="{{ r.id }}"  href = "{% url 'deletar' id=r.id %}">Excluir</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="buttons__gerar">
+    <a name="link_cad" href = "{% url 'cadastrar' %}" style="text-decoration:none"><button style="margin-right: 70px;" class="button-17 float-right" role="button"><span class="text">Cadastrar Novo Colaborador</span></button></a>
+    <a name='link_ger' href = "{% url 'gerador' %}" style="text-decoration:none"><button class="button-17" role="button"><span class="text">Gerar DAES</span></button></a>
+    {% if request.user.is_superuser %}
+        <a name='link_gera_tra' href = "{% url 'gerador_transparencia' %}" style="text-decoration:none"><button id="btn_trans" class="button-17" role="button"><span class="text">Gerar Transparência</span></button></a>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Formulário de Terceirizados</title>
+  </head>
+  <body id="container">
+    
+
+    <div class="testbox">
+        <br>
+        <center><h3 style="font-weight: bold; color: black;">DOCUMENTO DE ATESTE DE EXECUÇÃO DE SERVIÇOS</h3></center>
+        <br>
+        <br>
+        <div class="atrasos">
+          <div class="inlineatrasos" style="margin-right: 4.6vh;">
+          <label style="font-weight: bold;" for="fiscal">Fiscal Técnico <span class="required">*</span></label>
+          <input type="text" name="fiscal" value = "{{request.user.get_full_name}}" />
+        </div>
+        
+        <div class="inlineatrasos" style="margin-right: 4.6vh;">
+          <label style="font-weight: bold;" for="unidade">Unidade <span class="required">*</span></label>
+          <select required name="unidade" id="unidSelect">
+            <option value="pres">PRES</option>
+            <option value="vpcre">VPCRE</option>
+            <option value="eje">EJE</option>
+            <option value="ore">ORE</option>
+            <option value="dg">DG</option>
+            <option value="sgp">SGP</option>
+            <option value="sao">SAO</option>
+            <option value="sti">STI</option>
+            <option value="ze">ZE</option>
+          </select>
+        </div>
+
+      <div class="inlineatrasos">
+          <label style="font-weight: bold;" for="periodo">Período de Ateste <span class="required">*</span></label>
+          <input type="text" name="fiscal" value = "{{referencia}}" />
+        </div>
+      </div>
+
+        <p></p>
+
+        <div class="table-wrapper-daes" style="margin: 10px 0px 0px;">
+          <table class="table">
+              <thead  class="thead-dark">
+                  <tr>
+                      <th>Nome Completo</th>
+                      <th>Unidade</th>
+                      <th>Contrato</th>
+                      <th>Vigência</th>
+                      <th>Contratada</th>
+                      <th>CNPJ</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {% for r in terc %}
+                  <tr>
+                      <td>{{ r.nome_completo }}</td>
+                      <td>{{ r.unidade }}</td>
+                      <td>{{ r.contrato }}</td>
+                      <td>{{ r.vigencia }}</td>
+                      <td>{{ r.contratada }}</td>
+                      <td>{{ r.cnpj_contratada }}</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+      </div>
+
+      <div class="atrasos">
+        <div class="inlineatrasos">
+          <p style="font-weight: bold;">Atrasos:</p>
+          <select style="width: 14vh; margin-right: 9.9vh;" required>
+            <option value="0">Não Houve</option>
+            <option value="1">Houve</option>
+          </select>
+        </div>
+
+        <div class="inlineatrasos">
+          <p style="font-weight: bold;">Faltas:</p>
+          <select style="width: 14vh; margin-right: 9.9vh;" required>
+            <option value="0">Não Houve</option>
+            <option value="1">Houve</option>
+          </select>
+        </div>
+
+        <div class="inlineatrasos">
+          <p style="font-weight: bold;">Férias:</p>
+          <select style="width: 14vh;" required>
+            <option value="0">Não se aplica</option>
+            <option value="1">Se aplica</option>
+          </select>
+        </div>  
+      
+      </div>
+
+      <br><br>
+
+      <div>
+        <p style="font-weight: bold;">OCORRÊNCIAS</p>
+        <div>
+          <div class="inline-group">
+            <label for="item_1_quantity" class="inline-label">Faltas sem substituições:</label>
+            <select id="item_1_quantity" name="item_1_quantity" class="inline-select">
+              <option value="0">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <hr>
+          <div class="inline-group">
+            <label for="item_2_quantity" class="inline-label">Substituições:</label>
+            <select id="item_2_quantity" name="item_2_quantity" class="inline-select">
+              <option value="0">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <hr>
+          <div class="inline-group">
+            <label for="item_3_quantity" class="inline-label">Compensação da Jornada:</label>
+            <select id="item_3_quantity" name="item_3_quantity" class="inline-select">
+              <option value="0">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <hr>
+          <div class="inline-group">
+            <label for="item_1_quantity" class="inline-label">Deixar de executar atividades previstas neste Termo de Referência e solicitadas pelas Unidades:</label>
+            <select id="item_1_quantity" name="item_4_quantity" class="inline-select">
+              <option value="0">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <hr>
+          <div class="inline-group">
+            <label for="item_2_quantity" class="inline-label">Deixar de observar a pontualidade dos serviços com tolerância de 15 minutos:</label>
+            <select id="item_2_quantity" name="item_5_quantity" class="inline-select">
+              <option value="0">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <hr>
+          <div class="inline-group">
+            <label for="item_3_quantity" class="inline-label">Não cobrir a falta de colaboradores em no máximo 2 (duas) horas a partir da notificação:</label>
+            <select id="item_3_quantity" name="item_6_quantity" class="inline-select">
+              <option value="0">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <hr>
+          <div class="inline-group">
+              <label for="item_3_quantity" class="inline-label">Não solucionar notificações emitidas pela fiscalização do contrato:</label>
+              <select id="item_3_quantity" name="item_7_quantity" class="inline-select">
+                <option value="0">--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+          </div>
+          
+        </div>
+      </div>
+      <p></p>
+      <br>
+
+      <div>
+        <p style="font-weight: bold;">ESCLARECIMENTOS</p>
+        <textarea type="text" id="esclarecimentos" cols="120%" rows="5" name="esclarecimentos">Os serviços de apoio administrativo, objetos dos contratos supracitados, foram realizados de forma integral.</textarea>
+      </div>
+
+      <p></p>
+
+      <div>
+        <p style="font-weight: bold;">ATESTE</p>
+        <textarea type="text" id="ateste" cols="120%" rows="3" name="ateste">Atesto para os devidos fins que os serviços foram prestados satisfatoriamente, nos termos e especificações do contrato em epígrafe.</textarea>
+      </div>
+
+      <p></p>
+
+        <br>
+
+        <div>
+          <center><button class="btn btn-success btn-lg" id="print">Gerar Arquivo</button></center>
+        </div>
+        <br>
+
+    </div>
+  </body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    let printLink = document.getElementById("print");
+    let container = document.getElementById("container");
+
+    printLink.addEventListener("click", event => {
+        event.preventDefault();
+        printLink.style.display = "none";
+        window.print();
+    }, false);
+
+    container.addEventListener("click", event => {
+        printLink.style.display = "flex";
+    }, false);
+
+  }, false);
+</script>
+<style>
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(65, 65, 65);
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    }
+
+  @media print {
+    @page {
+      margin-left: 0.8in;
+      margin-right: 0.8in;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  #container {
+      width: 1000px;
+      margin: 0 auto;
+  }
+
+  .inline-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.inline-label {
+  width: 700px;
+  text-align: left;
+  margin-right: 208px;
+}
+.inline-select {
+  width: 75px;
+}
+.atrasos .inlineatrasos{
+    display: inline-block;
+}
+.table-wrapper-daes{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    height: auto;
+}
+
+</style>
